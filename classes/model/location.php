@@ -181,4 +181,14 @@ class Model_Location extends \Orm\Model
 			call_user_func(array($this, 'set_code_' . $key), $data);
 		}
 	}
+
+	/**
+	 * When setting postcode, use normalise postcode
+	 *
+	 * @param $postcode
+	 */
+	public function set_postcode($postcode)
+	{
+		$this->postcode = static::normalise_postcode($postcode);
+	}
 }
