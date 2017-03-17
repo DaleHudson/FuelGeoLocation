@@ -125,6 +125,18 @@ class Model_Location extends \Orm\Model
 		),
 	);
 
+	/**
+	 * Normalise postcodes by removing the space and uppercasing them
+	 *
+	 * @param $postcode
+	 *
+	 * @return mixed
+	 */
+	public static function normalise_postcode(string $postcode)
+	{
+		return str_replace(' ', '', strtoupper($postcode));
+	}
+
 	###################################
 	# INSTANCE
 	###################################
