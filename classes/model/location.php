@@ -137,6 +137,20 @@ class Model_Location extends \Orm\Model
 		return str_replace(' ', '', strtoupper($postcode));
 	}
 
+	/**
+	 * Find location record by postcode
+	 *
+	 * @param $postcode
+	 *
+	 * @return Model_Location
+	 */
+	public static function find_by_postcode(string $postcode)
+	{
+		return static::query()
+			->where('postcode', static::normalise_postcode($postcode))
+			->get_one();
+	}
+
 	###################################
 	# INSTANCE
 	###################################
