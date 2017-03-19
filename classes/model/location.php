@@ -2,7 +2,7 @@
 
 namespace FuelGeoLocation;
 
-class Model_Location extends \Orm\Model
+class Model_Location extends \Orm\Model implements Interface_GeoLocation_LatLon
 {
 	protected static $_table_name = "location";
 
@@ -151,6 +151,23 @@ class Model_Location extends \Orm\Model
 			->get_one();
 	}
 
+	/**
+	 * Get the latitude longitude values from postcodes
+	 *
+	 * @param $postcode
+	 *
+	 * @return mixed
+	 */
+	public static function get_lat_lon_by_postcode(string $postcode)
+	{
+		return \DB::select('latitude', 'longitude')
+			->from(static::table())
+			->where('postcode', '=', static::normalise_postcode($postcode))
+			->limit(1)
+			->execute()
+			->current();
+	}
+
 	###################################
 	# INSTANCE
 	###################################
@@ -204,5 +221,25 @@ class Model_Location extends \Orm\Model
 	public function set_postcode($postcode)
 	{
 		$this->postcode = static::normalise_postcode($postcode);
+	}
+
+	/**
+	 * Get the latitude value
+	 *
+	 * @return mixed
+	 */
+	public function get_latitude()
+	{
+		return $this->latitude;
+	}
+
+	/**
+	 * Get the longitude value
+	 *
+	 * @return mixed
+	 */
+	public function get_longitude()
+	{
+		return $this->longitude;
 	}
 }
