@@ -106,32 +106,59 @@ class Distance
 	/**
 	 * Calculate distance radius of a given longitude and latitude
 	 *
+	 * @param string $table
+	 * @param array $columns;
+	 *
 	 * @return mixed
 	 */
-	public function calculate_distance()
+	public function calculate_distance($table, array $columns = array())
 	{
-		$query = "Select id, postcode, latitude, longitude,
-                   acos(sin(:lat)*sin(radians(latitude)) + cos(:lat)*cos(radians(latitude))*cos(radians(longitude)-:lon)) * :R As D
-            From (
-                Select id, postcode, latitude, longitude
-                From location
-                Where latitude Between :minLat And :maxLat
-                  And longitude Between :minLon And :maxLon
-            ) As FirstCut
-            Where acos(sin(:lat)*sin(radians(latitude)) + cos(:lat)*cos(radians(latitude))*cos(radians(longitude)-:lon)) * :R < :rad
-            Order by D";
+		$this->check_for_lat_lon_columns($columns);
 
-		$parameters = array(
+		$sub_query = \DB::select_array($columns)
+			->from($table)
+			->where('latitude', 'between', [$this->get_min_latitude(), $this->get_max_latitude()])
+			->where('longitude', 'between', [$this->get_min_longitude(), $this->get_max_longitude()]);
+
+		$distance_algorithm_sql = \DB::expr($this->distance_algorithm_sql());
+
+		$columns[] = [$distance_algorithm_sql, 'D'];
+
+		return \DB::select_array($columns)
+			->from([$sub_query, "FirstCut"])
+			->where($distance_algorithm_sql, '<', $this->get_distance())
+			->execute()
+			->as_array();
+	}
+
+	/**
+	 * Check that columns array has latitude and longitude columns, if not add them to array
+	 *
+	 * @param array $columns
+	 */
+	protected function check_for_lat_lon_columns(array &$columns)
+	{
+		if ( ! in_array('latitude', $columns)) {
+			$columns[] = 'latitude';
+		}
+
+		if ( ! in_array('longitude', $columns)) {
+			$columns[] = 'longitude';
+		}
+	}
+
+	/**
+	 * Algorithm that calculates distance
+	 *
+	 * @return mixed
+	 */
+	protected function distance_algorithm_sql()
+	{
+		$sql = "acos(sin(:lat)*sin(radians(latitude)) + cos(:lat)*cos(radians(latitude))*cos(radians(longitude)-:lon)) * :R";
+		return \DB::query($sql)->parameters([
 			"lat" => deg2rad($this->get_latitude()),
 			"lon" => deg2rad($this->get_longitude()),
-			"minLat" => $this->get_min_latitude(),
-			"minLon" => $this->get_min_longitude(),
-			"maxLat" => $this->get_max_latitude(),
-			"maxLon" => $this->get_max_longitude(),
-			"rad" => $this->get_distance(),
-			"R" => $this->get_earth_radius(),
-		);
-
-		return \DB::query($query)->parameters($parameters)->execute();
+			"R" => $this->get_earth_radius()
+		])->compile();
 	}
 }
