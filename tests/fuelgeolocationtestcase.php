@@ -41,4 +41,49 @@ abstract class FuelGeoLocationTestCase extends TestCase
 
 		unset($this->faker);
 	}
+
+	/**
+	 * Build up a dummy location model that will replicate a successful response from
+	 * postcodes.io api
+	 *
+	 * @return \stdClass
+	 */
+	protected function create_location_data()
+	{
+		$county = $this->faker->county;
+		$city = $this->faker->city;
+
+		$data = new \stdClass();
+		$data->postcode = $this->faker->postcode;
+		$data->quality = 1;
+		$data->eastings = $this->faker->randomNumber(6);
+		$data->northings = $this->faker->randomNumber(6);
+		$data->country = $this->faker->country;
+		$data->nhs_ha = $county;
+		$data->longitude = $this->faker->longitude;
+		$data->latitude = $this->faker->latitude;
+		$data->parliamentary_constituency = $city;
+		$data->european_electoral_region = $county;
+		$data->primary_care_trust = $county;
+		$data->region = $county;
+		$data->lsoa = $this->faker->word;
+		$data->msoa = $this->faker->word;
+		$data->incode = "3BH";
+		$data->outcode = "CV21";
+		$data->admin_district = $city;
+		$data->parish = $city . ', Unparished Area';
+		$data->admin_county = $county;
+		$data->admin_ward = $this->faker->word;
+		$data->ccg = $city;
+		$data->nuts = $county;
+		$data->codes = new \stdClass();
+		$data->codes->admin_district = $this->faker->word;
+		$data->codes->admin_county = $this->faker->word;
+		$data->codes->admin_ward = $this->faker->word;
+		$data->codes->parish = $this->faker->word;
+		$data->codes->ccg = $this->faker->word;
+		$data->codes->nuts = $this->faker->word;
+
+		return $data;
+	}
 }
