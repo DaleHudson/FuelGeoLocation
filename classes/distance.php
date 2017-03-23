@@ -138,7 +138,7 @@ class Distance
 
 		$distance_algorithm_sql = \DB::expr($this->distance_algorithm_sql());
 
-		$columns[] = [$distance_algorithm_sql, 'D'];
+		$columns[] = [$distance_algorithm_sql, 'distance'];
 
 		return \DB::select_array($columns)
 			->from([$sub_query, "FirstCut"])
