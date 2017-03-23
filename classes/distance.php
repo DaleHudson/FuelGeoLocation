@@ -19,9 +19,14 @@ class Distance
 	 */
 	protected $interface;
 
-	public function __construct($earth_radius, $distance, Interface_GeoLocation_LatLon $interface)
+	/**
+	 * @param string $metric_value
+	 * @param string $distance
+	 * @param Interface_GeoLocation_LatLon $interface
+	 */
+	public function __construct($metric_value, $distance, Interface_GeoLocation_LatLon $interface)
 	{
-		if ($earth_radius == "miles") {
+		if ($metric_value == "miles") {
 			$this->earth_radius = 3959;
 		} else {
 			$this->earth_radius = 6371;
