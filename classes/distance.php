@@ -2,6 +2,17 @@
 
 namespace FuelGeoLocation;
 
+/**
+ * Class Distance
+ *
+ * Class calculates distances from selected points within a bounding circle
+ *
+ * @package FuelGeoLocation
+ *
+ * @author Dale Hudson dalehudson26@gmail.com
+ *
+ * @see http://www.movable-type.co.uk/scripts/latlong-db.html Documentation for bounding box query
+ */
 class Distance
 {
 	/**
