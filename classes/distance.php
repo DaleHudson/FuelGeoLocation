@@ -79,7 +79,7 @@ class Distance
 	/**
 	 * @return mixed
 	 */
-	private function get_max_latitude()
+	protected function get_max_latitude()
 	{
 		return $this->get_latitude() + rad2deg($this->get_distance()/$this->get_earth_radius());
 	}
@@ -87,7 +87,7 @@ class Distance
 	/**
 	 * @return mixed
 	 */
-	private function get_min_latitude()
+	protected function get_min_latitude()
 	{
 		return $this->get_latitude() - rad2deg($this->get_distance()/$this->get_earth_radius());
 	}
@@ -95,7 +95,7 @@ class Distance
 	/**
 	 * @return mixed
 	 */
-	private function get_max_longitude()
+	protected function get_max_longitude()
 	{
 		return $this->get_longitude() + rad2deg(asin($this->get_distance()/$this->get_earth_radius()) / cos(deg2rad($this->get_latitude())));
 	}
@@ -103,7 +103,7 @@ class Distance
 	/**
 	 * @return mixed
 	 */
-	private function get_min_longitude()
+	protected function get_min_longitude()
 	{
 		return $this->get_longitude() - rad2deg(asin($this->get_distance()/$this->get_earth_radius()) / cos(deg2rad($this->get_latitude())));
 	}
