@@ -26,6 +26,7 @@ class Test_Model_Location extends FuelGeoLocationTestCase
 	}
 
 	/**
+	 * @group Geo
 	 * @group Postcode
 	 * @group PostcodeModel
 	 */
@@ -37,6 +38,7 @@ class Test_Model_Location extends FuelGeoLocationTestCase
 	}
 
 	/**
+	 * @group Geo
 	 * @group Postcode
 	 * @group PostcodeModel
 	 *
