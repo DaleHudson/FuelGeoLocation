@@ -15,14 +15,24 @@ class Test_Distance extends FuelGeoLocationTestCase
 	{
 		parent::setUp();
 
-		$this->set_location_model();
+		// Insert location model
+		$location_model = new Model_Location();
+		$location_model->save_location($this->create_location_data());
+
+		$this->location_model = \Mockery::mock('\FuelGeoLocation\Model_Location');
+		$this->location_model->shouldReceive('get_latitude')
+			->andReturn(52.526225)
+			->shouldReceive('get_longitude')
+			->andReturn(-1.447619)
+			->shouldReceive('save_location')
+			->andReturn($this->create_location_data());
 	}
 
 	public function tearDown()
 	{
 		parent::tearDown();
 
-		unset($this->location_model);
+		\Mockery::close();
 	}
 
 	/**
@@ -38,16 +48,6 @@ class Test_Distance extends FuelGeoLocationTestCase
 		$this->assertArrayHasKey("latitude", $result[0]);
 		$this->assertArrayHasKey("longitude", $result[0]);
 		$this->assertArrayHasKey("distance", $result[0]);
-	}
-
-	/**
-	 * Create a new location model and set data to it
-	 */
-	protected function set_location_model()
-	{
-		$location_model = new Model_Location();
-		$location_model->save_location($this->create_location_data());
-
-		$this->location_model = $location_model;
+		$this->assertEquals(0.0018335559961407198, $result[0]['distance']);
 	}
 }
