@@ -60,8 +60,8 @@ abstract class FuelGeoLocationTestCase extends TestCase
 		$data->northings = $this->faker->randomNumber(6);
 		$data->country = $this->faker->country;
 		$data->nhs_ha = $county;
-		$data->longitude = $this->faker->longitude;
-		$data->latitude = $this->faker->latitude;
+		$data->longitude = -1.447619;
+		$data->latitude = 52.526225;
 		$data->parliamentary_constituency = $city;
 		$data->european_electoral_region = $county;
 		$data->primary_care_trust = $county;
