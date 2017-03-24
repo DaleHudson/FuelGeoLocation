@@ -8,6 +8,7 @@ require_once __DIR__ . '/../../classes/postcodeio.php';
 class Test_PostcodeIO extends FuelGeoLocationTestCase
 {
 	/**
+	 * @group Geo
 	 * @group Postcode
 	 */
 	public function test_successful_postcode_lookup()
@@ -27,6 +28,7 @@ class Test_PostcodeIO extends FuelGeoLocationTestCase
 	}
 
 	/**
+	 * @group Geo
 	 * @group Postcode
 	 */
 	public function test_successful_postcode_valid_lookup()
@@ -42,6 +44,7 @@ class Test_PostcodeIO extends FuelGeoLocationTestCase
 	}
 
 	/**
+	 * @group Geo
 	 * @group Postcode
 	 *
 	 * @expectedException RequestStatusException
@@ -53,6 +56,7 @@ class Test_PostcodeIO extends FuelGeoLocationTestCase
 	}
 
 	/**
+	 * @group Geo
 	 * @group Postcode
 	 */
 	public function test_unsuccessful_postcode_valid_lookup()
