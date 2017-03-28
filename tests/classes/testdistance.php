@@ -41,7 +41,9 @@ class Test_Distance extends FuelGeoLocationTestCase
 	public function test_calculate_distance()
 	{
 		$distance = new Distance("miles", "25", $this->location_model);
-		$result = $distance->calculate_distance("location", array('id'));
+		$query = $distance->calculate_distance("location", array('id'));
+
+		$result = $query->execute()->as_array();
 
 		$this->assertInternalType("array", $result);
 		$this->assertInternalType("array", $result[0]);
