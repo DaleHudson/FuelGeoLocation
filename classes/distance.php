@@ -142,9 +142,7 @@ class Distance
 
 		return \DB::select_array($columns)
 			->from([$sub_query, "FirstCut"])
-			->where($distance_algorithm_sql, '<', $this->get_distance())
-			->execute()
-			->as_array();
+			->where($distance_algorithm_sql, '<', $this->get_distance());
 	}
 
 	/**
