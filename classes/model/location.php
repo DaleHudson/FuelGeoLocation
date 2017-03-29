@@ -126,6 +126,27 @@ class Model_Location extends \Orm\Model implements Interface_GeoLocation_LatLon
 	);
 
 	/**
+	 * If cannot find a location model with given postcode, create one.
+	 *
+	 * @param $postcode
+	 *
+	 * @return \FuelGeoLocation\Model_Location|static
+	 */
+	public static function find_or_forge_from_postcode(string $postcode)
+	{
+		if ( ! $location_model = \FuelGeoLocation\Model_Location::find_by_postcode($postcode)) {
+			$location_model = \FuelGeoLocation\Model_Location::forge();
+
+			$postcodeIO = new \FuelGeoLocation\PostcodeIO();
+			$result = $postcodeIO->lookup($postcode);
+
+			$location_model->save_location($result->result);
+		}
+
+		return $location_model;
+	}
+
+	/**
 	 * Normalise postcodes by removing the space and uppercasing them
 	 *
 	 * @param $postcode
