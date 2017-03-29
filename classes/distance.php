@@ -127,7 +127,7 @@ class Distance
 	 *
 	 * @return mixed
 	 */
-	public function calculate_distance($table, array $columns = array())
+	public function calculate_distance($table, $columns = array())
 	{
 		$this->check_for_lat_lon_columns($columns);
 
@@ -150,8 +150,18 @@ class Distance
 	 *
 	 * @param array $columns
 	 */
-	protected function check_for_lat_lon_columns(array &$columns)
+	protected function check_for_lat_lon_columns(&$columns = array())
 	{
+		if ( ! $columns) {
+			$columns[] = "*";
+			return;
+		}
+
+		if (is_string($columns) && $columns == "*") {
+			$columns = ["*"];
+			return;
+		}
+
 		if ( ! in_array('latitude', $columns)) {
 			$columns[] = 'latitude';
 		}
