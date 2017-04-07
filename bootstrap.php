@@ -3,8 +3,38 @@
 \Autoloader::add_namespace('FuelGeoLocation', __DIR__ . '/classes/');
 
 \Autoloader::add_classes(array(
+	/*
+	 * Providers
+	 */
 	'FuelGeoLocation\\PostcodeIO' => __DIR__ . '/classes/postcodeio.php',
+	'FuelGeoLocation\\GoogleGeoCode' => __DIR__ . '/classes/googlegeocode.php',
+
+	/*
+	 * Classes
+	 */
 	'FuelGeoLocation\\Distance' => __DIR__ . '/classes/distance.php',
+
+	/*
+	 * Models
+	 */
 	'FuelGeoLocation\\Model_Location' => __DIR__ . '/classes/model/location.php',
+
+	/*
+	 * Interfaces
+	 */
 	'FuelGeoLocation\\Interface_GeoLocation_LatLon' => __DIR__ . '/classes/interface/geolocation/latlon.php',
+
+	/*
+	 * Response Classes
+	 */
+	'FuelGeoLocation\\Response\\Response_GoogleGeoCode' => __DIR__ . '/response/googlegeocode.php',
+
+	/*
+	 * Exceptions
+	 */
+	'FuelGeoLocation\\Exception\\Exceptions_InvalidRequest' => __DIR__ . '/exceptions/invalidrequest.php',
+	'FuelGeoLocation\\Exception\\Exceptions_QueryLimit' => __DIR__ . '/exceptions/querylimit.php',
+	'FuelGeoLocation\\Exception\\Exceptions_RequestDenied' => __DIR__ . '/exceptions/requestdenied.php',
+	'FuelGeoLocation\\Exception\\Exceptions_UnknownError' => __DIR__ . '/exceptions/unknownerror.php',
+	'FuelGeoLocation\\Exception\\Exceptions_ZeroResults' => __DIR__ . '/exceptions/zeroresults.php',
 ));
