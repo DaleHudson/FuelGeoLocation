@@ -8,15 +8,21 @@ require_once __DIR__ . '/../../classes/googlegeocode.php';
 class Test_GoogleGeocode extends FuelGeoLocationTestCase
 {
 	/**
-	 * @group Geo
-	 * @group Google
+	 * @group GoogleGeo
 	 */
-	public function test_retrieving_api_key()
+	public function test_successful_request()
 	{
-		$geocode = new GoogleGeoCode();
+		$geocode = new \FuelGeoLocation\GoogleGeoCode();
+		$result = $geocode->curl_request(array("address" => "CV21 3BH"));
 
-		$key = $geocode->get_api_key();
-
-		$this->assertInternalType('string', $key);
+		$this->assertInternalType('array', $result);
+		$this->assertInternalType('string', $result['status']);
+		$this->assertInternalType('array', $result['results']);
+		$this->assertArrayHasKey('geometry', $result['results'][0]);
+		$this->assertArrayHasKey('location', $result['results'][0]['geometry']);
+		$this->assertArrayHasKey('lat', $result['results'][0]['geometry']['location']);
+		$this->assertArrayHasKey('lng', $result['results'][0]['geometry']['location']);
+		$this->assertInternalType('float', $result['results'][0]['geometry']['location']['lat']);
+		$this->assertInternalType('float', $result['results'][0]['geometry']['location']['lng']);
 	}
 }
