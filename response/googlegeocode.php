@@ -4,13 +4,33 @@ namespace FuelGeoLocation\Response;
 
 class Response_GoogleGeoCode
 {
+	/**
+	 * @var array The geocode result that has already been decoded and turned into array
+	 */
 	protected $result;
 
+	/**
+	 * Response_GoogleGeoCode constructor.
+	 *
+	 * @param array $result
+	 */
 	public function __construct($result)
 	{
 		$this->result = $result;
 	}
 
+	/**
+	 * Determine how to handle the response from the resulting data
+	 *
+	 * @return array|null
+	 *
+	 * @throws \Exception
+	 * @throws \FuelGeoLocation\Exception\Exceptions_InvalidRequest
+	 * @throws \FuelGeoLocation\Exception\Exceptions_QueryLimit
+	 * @throws \FuelGeoLocation\Exception\Exceptions_RequestDenied
+	 * @throws \FuelGeoLocation\Exception\Exceptions_UnknownError
+	 * @throws \FuelGeoLocation\Exception\Exceptions_ZeroResults
+	 */
 	public function handle_response()
 	{
 		$result = null;
@@ -35,12 +55,7 @@ class Response_GoogleGeoCode
 				throw new \FuelGeoLocation\Exception\Exceptions_UnknownError("An unknown error has occurred. Try again.");
 				break;
 			default:
-				throw new \Exception("Unfamiliar status detected");
-		}
-
-		// If no result at this point throw exception, because there should be results
-		if ( ! $result) {
-			throw new \Exception("No results set to result variable");
+				throw new \Exception("Unfamiliar status code detected");
 		}
 
 		return $result;
