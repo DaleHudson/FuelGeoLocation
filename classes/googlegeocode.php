@@ -41,7 +41,7 @@ class GoogleGeoCode
 	 * Perform the curl request to retrieve results
 	 *
 	 * @param array $params
-	 * s
+	 *
 	 * @return null
 	 */
 	public function curl_request(array $params)
