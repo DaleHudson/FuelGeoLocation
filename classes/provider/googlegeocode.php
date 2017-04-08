@@ -1,6 +1,6 @@
 <?php
 
-namespace FuelGeoLocation;
+namespace FuelGeoLocation\Provider;
 
 class GoogleGeoCode
 {
