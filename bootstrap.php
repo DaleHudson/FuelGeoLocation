@@ -4,15 +4,15 @@
 
 \Autoloader::add_classes(array(
 	/*
-	 * Providers
-	 */
-	'FuelGeoLocation\\PostcodeIO' => __DIR__ . '/classes/postcodeio.php',
-	'FuelGeoLocation\\GoogleGeoCode' => __DIR__ . '/classes/googlegeocode.php',
-
-	/*
 	 * Classes
 	 */
 	'FuelGeoLocation\\Distance' => __DIR__ . '/classes/distance.php',
+
+	/*
+	 * Providers
+	 */
+	'FuelGeoLocation\\Provider\\PostcodeIO' => __DIR__ . '/classes/postcodeio.php',
+	'FuelGeoLocation\\Provider\\GoogleGeoCode' => __DIR__ . '/classes/googlegeocode.php',
 
 	/*
 	 * Models
