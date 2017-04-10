@@ -44,7 +44,7 @@ class Create_Location
 				'code_nuts' => array('constraint' => 255, 'type' => 'varchar'),
 				'created_at' => array('constraint' => 11, 'type' => 'int'),
 				'updated_at' => array('constraint' => 11, 'type' => 'int', 'null' => true),
-			), array('id'), true, 'InnoDB', 'utf8_general_ci');
+			), array('id'), true, 'InnoDB', 'utf8_unicode_ci');
 
 			\DB::commit_transaction();
 		}
