@@ -2,9 +2,9 @@
 
 namespace Fuel\Migrations;
 
-class Create_Location
+class Create_Geocode_Table
 {
-	protected $table_name = "location";
+	protected $table_name = "geocode";
 
 	public function up()
 	{
@@ -13,35 +13,11 @@ class Create_Location
 			\DB::start_transaction();
 
 			\DBUtil::create_table($this->table_name, array(
-				'id' => array('constraint' => 11, 'type' => 'int', 'auto_increment' => true, 'unsigned' => true),
-				'postcode' => array('constraint' => 255, 'type' => 'varchar'),
-				'quality' => array('type' => 'int'),
-				'eastings' => array('type' => 'int'),
-				'northings' => array('type' => 'int'),
-				'country' => array('constraint' => 255, 'type' => 'varchar'),
-				'nhs_ha' => array('constraint' => 255, 'type' => 'varchar'),
+				'id' => array('type' => 'int', 'auto_increment' => true, 'unsigned' => true),
+				'search_term' => array('constraint' => 255, 'type' => 'varchar'),
 				'longitude' => array('type' => 'Decimal(9,6)'),
 				'latitude' => array('type' => 'Decimal(9,6)'),
-				'parliamentary_constituency' => array('constraint' => 255, 'type' => 'varchar'),
-				'european_electoral_region' => array('constraint' => 255, 'type' => 'varchar'),
-				'primary_care_trust' => array('constraint' => 255, 'type' => 'varchar'),
-				'region' => array('constraint' => 255, 'type' => 'varchar'),
-				'lsoa' => array('constraint' => 255, 'type' => 'varchar'),
-				'msoa' => array('constraint' => 255, 'type' => 'varchar'),
-				'incode' => array('constraint' => 255, 'type' => 'varchar'),
-				'outcode' => array('constraint' => 255, 'type' => 'varchar'),
-				'admin_district' => array('constraint' => 255, 'type' => 'varchar'),
-				'parish' => array('constraint' => 255, 'type' => 'varchar'),
-				'admin_county' => array('constraint' => 255, 'type' => 'varchar'),
-				'admin_ward' => array('constraint' => 255, 'type' => 'varchar'),
-				'ccg' => array('constraint' => 255, 'type' => 'varchar'),
-				'nuts' => array('constraint' => 255, 'type'=> 'varchar'),
-				'code_admin_district' => array('constraint' => 255, 'type' => 'varchar'),
-				'code_admin_county' => array('constraint' => 255, 'type' => 'varchar'),
-				'code_admin_ward' => array('constraint' => 255, 'type' => 'varchar'),
-				'code_parish' => array('constraint' => 255, 'type' => 'varchar'),
-				'code_ccg' => array('constraint' => 255, 'type' => 'varchar'),
-				'code_nuts' => array('constraint' => 255, 'type' => 'varchar'),
+				'search_result' => array('type' => 'text'),
 				'created_at' => array('constraint' => 11, 'type' => 'int'),
 				'updated_at' => array('constraint' => 11, 'type' => 'int', 'null' => true),
 			), array('id'), true, 'InnoDB', 'utf8_unicode_ci');
