@@ -11,13 +11,13 @@
 	/*
 	 * Providers
 	 */
-	'FuelGeoLocation\\Provider\\PostcodeIO' => __DIR__ . '/classes/postcodeio.php',
-	'FuelGeoLocation\\Provider\\GoogleGeoCode' => __DIR__ . '/classes/googlegeocode.php',
+	'FuelGeoLocation\\Provider\\PostcodeIO' => __DIR__ . '/classes/provider/postcodeio.php',
+	'FuelGeoLocation\\Provider\\GoogleGeoCode' => __DIR__ . '/classes/provider/googlegeocode.php',
 
 	/*
 	 * Models
 	 */
-	'FuelGeoLocation\\Model_Location' => __DIR__ . '/classes/model/location.php',
+	'FuelGeoLocation\\Model_Location' => __DIR__ . '/classes/model/geocode.php',
 
 	/*
 	 * Interfaces
