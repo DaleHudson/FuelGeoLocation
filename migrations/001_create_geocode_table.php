@@ -18,6 +18,7 @@ class Create_Geocode_Table
 				'longitude' => array('type' => 'Decimal(9,6)'),
 				'latitude' => array('type' => 'Decimal(9,6)'),
 				'search_result' => array('type' => 'text'),
+				'provider' => array('constraint' => 255, 'type' => 'varchar'),
 				'created_at' => array('constraint' => 11, 'type' => 'int'),
 				'updated_at' => array('constraint' => 11, 'type' => 'int', 'null' => true),
 			), array('id'), true, 'InnoDB', 'utf8_unicode_ci');
