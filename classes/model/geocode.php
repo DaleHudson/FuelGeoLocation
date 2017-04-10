@@ -56,6 +56,24 @@ abstract class Model_GeoCode extends \Orm\Model
 		),
 	);
 
+	/**
+	 * Find a model by search term, if it does not exist create model
+	 *
+	 * @param string $search_term
+	 *
+	 * @return static
+	 */
+	public static function find_or_forge_by_search_term($search_term)
+	{
+		$model = static::find_by_search_term($search_term);
+
+		if ( ! $model) {
+			$model = static::forge();
+		}
+
+		return $model;
+	}
+
 	###################################
 	# INSTANCE
 	###################################
