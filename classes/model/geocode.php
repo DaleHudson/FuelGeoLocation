@@ -2,7 +2,7 @@
 
 namespace FuelGeoLocation;
 
-class Model_GeoCode extends \Orm\Model implements Interface_GeoLocation_LatLon
+abstract class Model_GeoCode extends \Orm\Model
 {
 	protected static $_table_name = "geocode";
 
@@ -21,6 +21,12 @@ class Model_GeoCode extends \Orm\Model implements Interface_GeoLocation_LatLon
 		),
 		'latitude' => array(
 			'data_type' => 'decimal',
+		),
+		'search_result' => array(
+			'data_type' => 'text',
+		),
+		'provider' => array(
+			'data_type' => 'varchar',
 		),
 		'created_at' => array(
 			'data_type' => 'int',
@@ -57,20 +63,14 @@ class Model_GeoCode extends \Orm\Model implements Interface_GeoLocation_LatLon
 	/**
 	 * Save the retrieved location data
 	 *
-	 * @param object $location_data
+	 * @param object|array $geocode_data
+	 * @param string $search_term The search term to save
 	 *
 	 * @return bool
 	 *
 	 * @throws \Exception
 	 */
-	public function save_location($location_data)
-	{
-		foreach ($location_data as $key => $value) {
-			call_user_func(array($this, 'set_' . $key), $value);
-		}
-
-		return $this->save();
-	}
+	abstract public function save_geocode_data($geocode_data, $search_term);
 
 	/**
 	 * Get the latitude value
