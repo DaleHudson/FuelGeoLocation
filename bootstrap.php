@@ -17,7 +17,8 @@
 	/*
 	 * Models
 	 */
-	'FuelGeoLocation\\Model_Location' => __DIR__ . '/classes/model/geocode.php',
+	'FuelGeoLocation\\Model_GeoCode' => __DIR__ . '/classes/model/geocode.php',
+	'FuelGeoLocation\\Model_Provider_Google' => __DIR__ . '/classes/model/provider/google.php',
 
 	/*
 	 * Interfaces
