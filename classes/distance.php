@@ -120,6 +120,24 @@ class Distance
 	}
 
 	/**
+	 * Calculate whether two circles from lat/lon intersect or not
+	 * 
+	 * @param  string $table
+	 * @param  array  $columns
+	 * @return mixed
+	 */
+	public function calculate_distance_intersect($table, $distance_column, $columns = array())
+	{
+		$this->check_for_lat_lon_columns($columns);
+
+		$columns[] = [\DB::expr($this->distance_algorithm_sql()), 'distance'];
+
+		return \DB::select_array($columns)
+			->from($table)
+			->having('distance', '<=', \DB::expr("({$this->get_distance()} + {$distance_column})"));
+	}
+
+	/**
 	 * Calculate distance radius of a given longitude and latitude
 	 *
 	 * @param string $table
