@@ -56,33 +56,6 @@ abstract class Model_GeoCode extends \Orm\Model implements Interface_GeoLocation
 		),
 	);
 
-	/**
-	 * Find a model by search term, if it does not exist create model
-	 *
-	 * @param string $search_term
-	 *
-	 * @return static
-	 *
-	 * @throws \Exception
-	 */
-	public static function find_or_forge_by_search_term($search_term)
-	{
-		$model = static::find_by_search_term($search_term);
-
-		if ( ! $model) {
-			$google = new \FuelGeoLocation\Provider\GoogleGeoCode();
-			$results = $google->curl_request(array("address" => $search_term));
-
-			$model = static::forge();
-
-			if ( ! $model->save_geocode_data($results['results'], $search_term)) {
-				throw new \Exception("Could not save geocode data");
-			}
-		}
-
-		return $model;
-	}
-
 	###################################
 	# INSTANCE
 	###################################
