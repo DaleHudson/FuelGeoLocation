@@ -196,7 +196,7 @@ class Distance
 	 */
 	protected function distance_algorithm_sql()
 	{
-		$sql = "acos(sin(:lat)*sin(radians(latitude)) + cos(:lat)*cos(radians(latitude))*cos(radians(longitude)-:lon)) * :R";
+		$sql = "ROUND(acos(sin(:lat)*sin(radians(latitude)) + cos(:lat)*cos(radians(latitude))*cos(radians(longitude)-:lon)) * :R, 2)";
 		return \DB::query($sql)->parameters([
 			"lat" => deg2rad($this->get_latitude()),
 			"lon" => deg2rad($this->get_longitude()),
