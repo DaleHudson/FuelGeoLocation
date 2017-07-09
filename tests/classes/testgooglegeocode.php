@@ -3,7 +3,7 @@
 namespace FuelGeoLocation;
 
 require_once __DIR__ . '/../fuelgeolocationtestcase.php';
-require_once __DIR__ . '/../../classes/googlegeocode.php';
+require_once __DIR__ . '/../../classes/provider/googlegeocode.php';
 
 class Test_GoogleGeocode extends FuelGeoLocationTestCase
 {

@@ -3,7 +3,7 @@
 namespace FuelGeoLocation;
 
 require_once __DIR__ . '/../fuelgeolocationtestcase.php';
-require_once __DIR__ . '/../../classes/postcodeio.php';
+require_once __DIR__ . '/../../classes/provider/postcodeio.php';
 
 class Test_PostcodeIO extends FuelGeoLocationTestCase
 {
