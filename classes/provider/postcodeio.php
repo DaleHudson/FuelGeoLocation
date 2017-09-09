@@ -34,7 +34,7 @@ class PostcodeIO
 
 		$result = $curl->response();
 
-		return json_decode($result);
+		return json_decode($result, true);
 	}
 
 	/**
