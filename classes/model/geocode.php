@@ -63,14 +63,14 @@ abstract class Model_GeoCode extends \Orm\Model implements Interface_GeoLocation
 	/**
 	 * Save the retrieved location data
 	 *
-	 * @param object|array $geocode_data
+	 * @param array $geocode_data
 	 * @param string $search_term The search term to save
 	 *
 	 * @return bool
 	 *
 	 * @throws \Exception
 	 */
-	abstract public function save_geocode_data($geocode_data, $search_term);
+	abstract public function save_geocode_data(array $geocode_data, $search_term);
 
 	/**
 	 * Get the latitude value
@@ -90,5 +90,17 @@ abstract class Model_GeoCode extends \Orm\Model implements Interface_GeoLocation
 	public function get_longitude()
 	{
 		return $this->longitude;
+	}
+
+	/**
+	 * Set the search results
+	 *
+	 * json encode the results for storing in DB
+	 *
+	 * @param array $results
+	 */
+	public function set_search_result(array $results)
+	{
+		$this->search_result = json_encode($results);
 	}
 }
